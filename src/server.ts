@@ -1,7 +1,9 @@
+import * as dotenv from "dotenv";
 import * as express from "express";
 import * as morgan from "morgan";
 import { router } from "./routes";
 
+dotenv.config();
 const app = express();
 
 app.use(morgan("dev"));
