@@ -6,8 +6,8 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "lib": ["es2015", "esnext.asynciterable"],
-    "sourceMap": true,
+    "sourceMap": true
   },
   "exclude": ["node_modules"],
-  "include": ["*.ts"]
+  "include": ["*.ts", "./src/**/*.ts", "./test/**/*.ts"]
 }
