@@ -17,5 +17,5 @@
     "strictNullChecks": true,
     "sourceMap": true
   },
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*.ts", "./test/**/*.ts", "./prisma/**/*.ts"]
 }
