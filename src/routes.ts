@@ -1,8 +1,8 @@
-import * as express from "express";
-import ArticleController from './controllers/article_controller';
+import * as express from 'express'
+import ArticleController from './controllers/article_controller'
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/articles",  ArticleController.index);
+router.get('/articles', ArticleController.index)
 
-export { router };
+export {router}

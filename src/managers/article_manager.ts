@@ -1,14 +1,14 @@
-import {Article} from "../models/article";
-import {Repository} from "../contracts/repository";
+import {IRepository} from '../interfaces/repository.interface'
+import {Article} from '../models/article'
 
 export class ArticleManager {
-  private repo: Repository;
+  private repo: IRepository
 
-  constructor(repo: Repository){
-    this.repo = repo;
+  constructor(repo: IRepository) {
+    this.repo = repo
   }
 
-  async getArticles(): Promise<Article[]> {
-    return await this.repo.articles();
+  public async getArticles(): Promise<Article[]> {
+    return this.repo.articles()
   }
 }

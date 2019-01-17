@@ -1,9 +1,9 @@
-export class Article{
-  title: string;
-  pages: number;
+export class Article {
+  public title: string
+  public pages: number
 
-  constructor(title:string, pages:number){
-    this.pages = pages;
-    this.title = title;
+  constructor (title: string, pages: number) {
+    this.pages = pages
+    this.title = title
   }
 }

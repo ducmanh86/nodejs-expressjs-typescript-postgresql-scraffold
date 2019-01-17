@@ -1,29 +1,18 @@
-import { ArticleManager } from "../../src/managers/article_manager";
-import { Article } from "../../src/models/article";
-import { Repository } from "../../src/contracts/repository";
+import {ArticleManager} from '../../src/managers/article_manager'
+import {Article} from '../../src/models/article'
+import {EmptyMockRepository} from '../../src/resources/empty_mock_repository'
+import {SingleMockRepository} from '../../src/resources/single_mock_repository'
 
-test("getArticles_noArticlesInDB_emptyList", async () => {
-  const articleManager = new ArticleManager(new EmptyMockRepository());
-  const articles: Article[] = await articleManager.getArticles();
+test('getArticles_noArticlesInDB_emptyList', async() => {
+  const articleManager = new ArticleManager(new EmptyMockRepository())
+  const articles: Article[] = await articleManager.getArticles()
 
-  expect(articles.length).toBe(0);
-});
+  expect(articles.length).toBe(0)
+})
 
-test("getArticles_oneArticleInDB_ListOfOneArticle", async () => {
-  const articleManager = new ArticleManager(new SingleMockRepository());
-  const articles: Article[] = await articleManager.getArticles();
+test('getArticles_oneArticleInDB_ListOfOneArticle', async() => {
+  const articleManager = new ArticleManager(new SingleMockRepository())
+  const articles: Article[] = await articleManager.getArticles()
 
-  expect(articles.length).toBe(1);
-});
-
-class EmptyMockRepository implements Repository {
-  async articles(): Promise<Article[]> {
-    return [];
-  }
-}
-
-class SingleMockRepository implements Repository {
-  async articles(): Promise<Article[]> {
-    return [new Article("Lord Of The Rings", 5)];
-  }
-}
+  expect(articles.length).toBe(1)
+})

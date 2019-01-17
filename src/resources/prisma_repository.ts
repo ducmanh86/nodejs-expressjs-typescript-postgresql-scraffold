@@ -1,9 +1,9 @@
-import { Repository } from "../contracts/repository";
-import { Article } from "../models/article";
-import { prisma } from "../../prisma/generated/prisma-client";
+import {prisma} from '../../prisma/generated/prisma-client'
+import {IRepository} from '../interfaces/repository.interface'
+import {Article} from '../models/article'
 
-export class PrismaRepository implements Repository{
-  async articles(): Promise<Article[]> {
-    return await prisma.articles().$fragment("{ title pages}");
+export class PrismaRepository implements IRepository {
+  public async articles (): Promise<Article[]> {
+    return prisma.articles().$fragment('{ title pages}')
   }
 }
