@@ -8,7 +8,7 @@ describe('GET /articles', () => {
     await db.deleteManyArticles({})
     request(app)
       .get('/articles')
-      .end((err, res) => {
+      .end((err: any, res: { status: any; }) => {
         if (err) {
           throw err
         }
@@ -27,7 +27,7 @@ describe('GET /articles', () => {
     await db.createArticle(articles[1])
     request(app)
       .get('/articles')
-      .end((err, res) => {
+      .end((err: any, res: { body: any; }) => {
         if (err) {
           throw err
         }
