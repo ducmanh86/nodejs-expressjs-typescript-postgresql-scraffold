@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+logs
+.tmp
+.vscode
+.idea
+docs
+test
+README.md
+.gitignore
+.env.example
+jest.config.js
+Dockerfile
+docker-compose.*
+.gitlab-ci.yml
