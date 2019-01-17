@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "./prisma/**/*.ts"
+    ]
+  },
+  "rules": {
+    "semicolon": [true, "never"],
+    "space-before-function-paren": [true, {"anonymous": "never", "named": "never", "asyncArrow": "never"}],
+    "object-curly-spacing": [true, "never"]
+  }
+}
