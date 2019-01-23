@@ -1,6 +1,6 @@
 // import all interfaces
-import {IRead} from '../interfaces/read.interface'
-import {IWrite} from '../interfaces/write.interface'
+import {IRead} from './interfaces/read.interface'
+import {IWrite} from './interfaces/write.interface'
 
 // that class only can be extended
 export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {

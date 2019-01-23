@@ -1,7 +1,7 @@
 import {prisma as db} from '../../prisma/generated/prisma-client'
 import {ArticleManager} from '../../src/managers/article_manager'
 import {Article} from '../../src/models/article'
-import {PrismaRepository} from '../../src/resources/prisma_repository'
+import {PrismaRepository} from '../../src/repositories/prisma_repository'
 
 test('getArticles_noArticlesInDB_emptyList', async() => {
   await db.deleteManyArticles({})

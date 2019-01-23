@@ -1,5 +1,5 @@
-import {IRepository} from '../interfaces/repository.interface'
 import {Article} from '../models/article'
+import {IRepository} from '../repositories/interfaces/repository.interface'
 
 export class ArticleManager {
   private repo: IRepository

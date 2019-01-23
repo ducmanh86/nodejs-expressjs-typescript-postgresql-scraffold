@@ -1,28 +1,26 @@
-import * as dotenv from 'dotenv'
+import configs from './configs'
 import {app} from './server'
+import {logger} from './utils/logger'
 
-dotenv.config()
-const port = process.env.PORT || 3000
-
-const server = app.listen(port, (err: any) => {
+const server = app.listen(configs.PORT, (err: any) => {
   if (err) {
-    // tslint:disable-next-line:no-console
-    console.error(err)
+    logger.error(err)
     // kill process when getting error
     return process.exit(1)
   }
 
-  // tslint:disable-next-line:no-console
-  console.log(`server is listening on ${port}`)
+  logger.info(`server is listening on ${configs.PORT}`)
   if (process && process.send) {
     // send 'ready' signal to PM2
     process.send('ready')
   }
 })
 
+// exit server when close app
 process.on('SIGINT', () => {
   server.close((err: any) => {
     if (err) {
+      logger.error(err)
       process.exit(1)
     } else {
       process.exit(0)

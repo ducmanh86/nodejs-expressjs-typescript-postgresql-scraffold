@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "dist",
-    "target": "es2015",
+    "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["es2015", "esnext.asynciterable"],
@@ -11,8 +11,10 @@
         "node_modules/*"
       ]
     },
+    "strict": false,
     "esModuleInterop": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "sourceMap": true
