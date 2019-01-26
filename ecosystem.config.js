@@ -1,3 +1,4 @@
+// configs for pm2
 module.exports = {
   apps : [{
     name: 'articles',

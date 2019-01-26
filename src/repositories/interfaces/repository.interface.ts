@@ -1,5 +1,6 @@
-import {Article} from '../../models/article'
+import {IArticle} from '../../models/article.model'
+// import {Article} from 'prisma/generated/prisma-client'
 
 export interface IRepository {
-  articles (): Promise<Article[]>
+  articles (): Promise<IArticle[]>
 }

@@ -1,4 +1,4 @@
 export interface IRead<T> {
-  find (item: T): Promise<T[]>
+  find (options): Promise<T[]>
   findOne (id: string): Promise<T>
 }

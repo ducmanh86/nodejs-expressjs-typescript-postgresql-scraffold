@@ -1,28 +1,43 @@
-import fs from 'fs'
-import path from 'path'
-import Sequelize from 'sequelize'
-import configs from '../configs'
+import {DefineModelAttributes} from 'sequelize'
+import database from '../configs/database.config'
+import {IArticle} from './interfaces/article.interface'
+import {Article} from './sequelize/article.seq'
 
-const basename = path.basename(module.filename)
-const db = {}
+interface IModel {
+  name: string,
+  seq: DefineModelAttributes<any>
+}
 
-const sequelize = new Sequelize({
-  dialect: configs.DB_DIALECT,
-  host: configs.DB_HOST,
-  port: parseInt(configs.DB_PORT as string, 10),
-  username: configs.DB_USERNAME,
-  password: configs.DB_PASSWORD,
-  database: configs.DB_DATABASE,
-  timezone: configs.DB_TIMEZONE,
-  logging: configs.NODE_ENV === 'development',
-  benchmark: configs.NODE_ENV === 'development'
+interface IModels {
+  [index: string]: IModel
+}
+
+const modelInfos = {
+  article: {name: 'article', seq: Article}
+}
+
+function defineTable<TAttributes>(model: IModel) {
+  return database.define<TAttributes, TAttributes>(model.name, model.seq, {paranoid: true})
+}
+
+const models = {}
+Object.keys(modelInfos).forEach((key) => {
+  models[modelInfos[key].name] = defineTable<IArticle>(modelInfos[key])
 })
 
-fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts')
-  })
-  .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file))
-    db[model.name] = model
-  })
+Object.keys(models).forEach((modelName) => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models)
+  }
+})
+
+const connectDb = () => {
+  return database.authenticate()
+}
+
+export {
+  database,
+  models,
+  modelInfos,
+  connectDb
+}

@@ -1,14 +1,18 @@
-import {Article} from '../models/article'
-import {IRepository} from '../repositories/interfaces/repository.interface'
+import {IArticle} from '../models/interfaces/article.interface'
+import {ArticleRepository} from '../repositories/article.repository'
 
 export class ArticleManager {
-  private repo: IRepository
+  private readonly repo: ArticleRepository
 
-  constructor(repo: IRepository) {
+  constructor(repo: ArticleRepository) {
     this.repo = repo
   }
 
-  public async getArticles(): Promise<Article[]> {
-    return this.repo.articles()
+  public getArticles(): Promise<IArticle[]> {
+    return this.repo.find({attributes: ['title', 'pages']})
+  }
+
+  public count(): Promise<number> {
+    return this.repo.countOfArticles()
   }
 }

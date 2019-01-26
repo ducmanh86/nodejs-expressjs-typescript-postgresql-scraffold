@@ -1,6 +1,6 @@
 import * as request from 'supertest'
 import {prisma as db} from '../../prisma/generated/prisma-client'
-import {Article} from '../../src/models/article'
+import {Article} from '../../src/models/article.model'
 import {app} from '../../src/server'
 
 describe('GET /articles', () => {

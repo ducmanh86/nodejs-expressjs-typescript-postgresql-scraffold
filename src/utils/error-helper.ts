@@ -17,7 +17,7 @@ export class HttpRequestError extends Error implements Error {
   public status: number
   public statusCode: number
 
-  constructor(message: string, code: string, status: number) {
+  constructor(message: string | any, code: string, status: number) {
     super(message)
     this.code = code
     this.status = status
@@ -26,31 +26,39 @@ export class HttpRequestError extends Error implements Error {
 }
 
 export class BadRequestError extends HttpRequestError {
-  constructor(message: string) {
+  constructor(message: string | any) {
     super(message, 'E400', 400)
   }
 }
 
 export class UnauthorizedError extends HttpRequestError {
-  constructor(message: string) {
+  constructor(message: string | any) {
     super(message, 'E401', 401)
   }
 }
 
 export class ForbiddenError extends HttpRequestError {
-  constructor(message: string) {
+  constructor(message: string | any) {
     super(message, 'E403', 403)
   }
 }
 
 export class NotFoundError extends HttpRequestError {
-  constructor(message: string) {
+  constructor(message: string | any) {
     super(message, 'E404', 404)
   }
 }
 
+export class UnprocessableEntityError extends HttpRequestError {
+  public extra: any
+  constructor(message: string | any, extra?: any) {
+    super(message, 'E422', 422)
+    this.extra = extra
+  }
+}
+
 export class InternalServerError extends HttpRequestError {
-  constructor(message: string, code?: string) {
+  constructor(message: string | any, code?: string) {
     super(message, code || 'E500', 500)
   }
 }
@@ -59,11 +67,15 @@ export const errorDefaultHandler = (err: any, req: Request, res: Response, next:
   logger.debug(err)
   const statusCode = err.status || err.statusCode || 500
   const message = (err && err.message) ? err.message : defaultMessage
+  const result: any = {
+    error: {
+      code: err.code || err.name,
+      message
+    }
+  }
+  if (err.extra) {
+    result.error.extra = err.extra
+  }
   res.status(statusCode)
-    .json({
-      error: {
-        code: err.code || err.name,
-        message
-      }
-    })
+    .json(result)
 }

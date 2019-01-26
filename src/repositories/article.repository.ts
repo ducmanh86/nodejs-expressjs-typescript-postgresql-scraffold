@@ -1,11 +1,8 @@
-import {Article} from '../models/article'
+import {IArticle} from '../models/interfaces/article.interface'
 import {BaseRepository} from './base.repository'
 
-// now, we have all code implementation from BaseRepository
-export class ArticleRepository extends BaseRepository<Article> {
-
-  // here, we can create all especific stuffs of Spartan IRepository
-  // countOfSpartans(): Promise<number> {
-    // return this._collection.count({})
-  // }
+export class ArticleRepository extends BaseRepository<IArticle> {
+  public countOfArticles(): Promise<number> {
+    return Promise.resolve(this._model.count())
+  }
 }

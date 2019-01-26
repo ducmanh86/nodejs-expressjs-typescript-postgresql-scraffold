@@ -13,7 +13,5 @@ COPY . .
 RUN npm install --only=prod
 RUN npm install pm2 -g
 RUN pm2 install pm2-logrotate
-# package to prettify logs
-RUN npm install pino-pretty -g
 
 EXPOSE 3000

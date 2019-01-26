@@ -1,5 +1,5 @@
 import {ArticleManager} from '../../src/managers/article_manager'
-import {Article} from '../../src/models/article'
+import {Article} from '../../src/models/article.model'
 import {EmptyMockRepository} from '../../src/repositories/empty_mock_repository'
 import {SingleMockRepository} from '../../src/repositories/single_mock_repository'
 

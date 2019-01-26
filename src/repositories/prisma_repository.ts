@@ -1,5 +1,5 @@
 import {prisma} from '../../prisma/generated/prisma-client'
-import {Article} from '../models/article'
+import {Article} from '../models/article.model'
 import {IRepository} from './interfaces/repository.interface'
 
 export class PrismaRepository implements IRepository {

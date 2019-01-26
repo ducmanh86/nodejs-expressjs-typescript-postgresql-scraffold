@@ -1,4 +1,4 @@
-import {Article} from '../models/article'
+import {Article} from '../models/article.model'
 import {IRepository} from './interfaces/repository.interface'
 
 export class SingleMockRepository implements IRepository {
