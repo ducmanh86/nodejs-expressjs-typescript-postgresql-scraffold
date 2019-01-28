@@ -48,17 +48,19 @@ describe('GET /articles', () => {
             if (err) {
               throw err
             }
-            expect(res.body.length).toEqual(articles.length)
+            expect(res.body.data.length).toEqual(articles.length)
+            expect(res.body.count).toEqual(articles.length)
+            expect(res.body.total_items).toEqual(articles.length)
 
-            expect(res.body[0].title).toEqual(articles[0].title)
-            expect(res.body[0].content).toEqual(articles[0].content)
-            expect(res.body[0].short_content).toEqual(articles[0].short_content)
-            expect(res.body[0].thumbnail_image).toEqual(articles[0].thumbnail_image)
+            expect(res.body.data[0].title).toEqual(articles[0].title)
+            expect(res.body.data[0].content).toEqual(articles[0].content)
+            expect(res.body.data[0].short_content).toEqual(articles[0].short_content)
+            expect(res.body.data[0].thumbnail_image).toEqual(articles[0].thumbnail_image)
 
-            expect(res.body[1].title).toEqual(articles[1].title)
-            expect(res.body[1].content).toEqual(articles[1].content)
-            expect(res.body[1].short_content).toEqual(articles[1].short_content)
-            expect(res.body[1].thumbnail_image).toEqual(articles[1].thumbnail_image)
+            expect(res.body.data[1].title).toEqual(articles[1].title)
+            expect(res.body.data[1].content).toEqual(articles[1].content)
+            expect(res.body.data[1].short_content).toEqual(articles[1].short_content)
+            expect(res.body.data[1].thumbnail_image).toEqual(articles[1].thumbnail_image)
 
             done()
           })

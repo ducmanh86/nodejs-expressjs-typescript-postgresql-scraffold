@@ -5,9 +5,12 @@ import ArticleService from '../../src/services/article.service'
 
 test('getArticles_noArticlesInDB_emptyList', async() => {
   const articleService = new ArticleService(new EmptyMockRepository())
-  const articles: IArticle[] = await articleService.getArticles()
+  const articles: {
+    rows: IArticle[],
+    count: number
+  } = await articleService.getArticles({page: 1, limit: 10, sort: 'asc', order: 'id'})
 
-  expect(articles.length).toBe(0)
+  expect(articles.rows.length).toBe(0)
 })
 
 test('getArticles_oneArticleInDB_ListOfOneArticle', async() => {
@@ -17,7 +20,10 @@ test('getArticles_oneArticleInDB_ListOfOneArticle', async() => {
     short_content: 'Test short content 1',
     thumbnail_image: ''
   }))
-  const articles: IArticle[] = await articleService.getArticles()
+  const articles: {
+    rows: IArticle[],
+    count: number
+  } = await articleService.getArticles({page: 1, limit: 10, sort: 'asc', order: 'id'})
 
-  expect(articles.length).toBe(1)
+  expect(articles.rows.length).toBe(1)
 })

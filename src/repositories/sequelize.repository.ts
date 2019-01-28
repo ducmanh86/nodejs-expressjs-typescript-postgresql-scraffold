@@ -1,6 +1,6 @@
-import {Model} from 'sequelize'
-import {modelInfos, models} from '../../models'
-import BaseRepository from '../base.repository'
+import {FindOptions, Model} from 'sequelize'
+import {modelInfos, models} from '../models'
+import BaseRepository from './base.repository'
 
 export default class SequelizeRepository<T> extends BaseRepository<T> {
   protected readonly model: Model<T, T>
@@ -36,11 +36,15 @@ export default class SequelizeRepository<T> extends BaseRepository<T> {
     return Promise.resolve(this.model.count(options))
   }
 
-  public find(options): Promise<T[]> {
+  public find(options: FindOptions<T>): Promise<T[]> {
     return Promise.resolve(this.model.findAll(options))
   }
 
-  public findOne(options): Promise<T | null> {
+  public findAndCount(options: FindOptions<T>): Promise<{rows: T[], count: number}> {
+    return Promise.resolve(this.model.findAndCountAll(options))
+  }
+
+  public findOne(options: FindOptions<T>): Promise<T | null> {
     return Promise.resolve(this.model.findOne(options))
   }
 }

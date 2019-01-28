@@ -47,6 +47,10 @@ export default {
   DEBUG: getenv('NODE_ENV') === 'development',
   LOG_LEVEL: getenv('LOG_LEVEL'),
   PORT: getenv.int('PORT'),
+
+  QUERY_LIMIT_SIZE: getenv.int('QUERY_LIMIT_SIZE'),
+  UPLOAD_MAX_FILE_SIZE: getenv.int('UPLOAD_MAX_FILE_SIZE') * 1024,
+
   DB_HOST: getenv('DB_HOST'),
   DB_PORT: getenv.int('DB_PORT'),
   DB_DATABASE: getenv('DB_DATABASE'),

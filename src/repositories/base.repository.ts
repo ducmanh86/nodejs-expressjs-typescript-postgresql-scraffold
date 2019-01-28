@@ -1,3 +1,4 @@
+import {FindOptions} from 'sequelize'
 import IRead from './interfaces/read.interface'
 import IWrite from './interfaces/write.interface'
 
@@ -15,10 +16,13 @@ export default abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
   public count(options): Promise<number> {
     throw new Error('Method not implemented.')
   }
-  public find(options): Promise<T[]> {
+  public find(options: FindOptions<T>): Promise<T[]> {
     throw new Error('Method not implemented.')
   }
-  public findOne(options): Promise<T | null> {
+  public findAndCount(options: FindOptions<T>): Promise<{rows: T[], count: number}> {
+    throw new Error('Method not implemented.')
+  }
+  public findOne(options: FindOptions<T>): Promise<T | null> {
     throw new Error('Method not implemented.')
   }
 }

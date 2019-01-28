@@ -1,3 +1,4 @@
+import {FindOptions} from 'sequelize'
 import BaseRepository from './base.repository'
 
 export default class SingleMockRepository<T> extends BaseRepository<T> {
@@ -10,6 +11,10 @@ export default class SingleMockRepository<T> extends BaseRepository<T> {
 
   public find(options): Promise<T[]> {
     return Promise.resolve([this.mockObject])
+  }
+
+  public findAndCount(options: FindOptions<T>): Promise<{rows: T[], count: number}> {
+    return Promise.resolve({rows: [this.mockObject], count: 1})
   }
 
   public findOne(options): Promise<T | null> {
