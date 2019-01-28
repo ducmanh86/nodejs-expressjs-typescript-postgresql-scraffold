@@ -7,7 +7,7 @@ import {IWrite} from './interfaces/write.interface'
 export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
   public readonly _model: Model<T, T>
 
-  constructor(modelName: string) {
+  protected constructor(modelName: string) {
     this._model = models[modelName]
   }
 

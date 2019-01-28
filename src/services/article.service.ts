@@ -1,11 +1,11 @@
 import {IArticle} from '../models/interfaces/article.interface'
 import {ArticleRepository} from '../repositories/article.repository'
 
-export class ArticleManager {
+export class ArticleService {
   private readonly repo: ArticleRepository
 
-  constructor(repo: ArticleRepository) {
-    this.repo = repo
+  constructor() {
+    this.repo = new ArticleRepository()
   }
 
   public getArticles(): Promise<IArticle[]> {

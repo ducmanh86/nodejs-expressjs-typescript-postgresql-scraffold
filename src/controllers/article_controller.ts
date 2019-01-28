@@ -1,16 +1,12 @@
 import {NextFunction, Request, Response} from 'express'
-import {ArticleManager} from '../managers/article_manager'
-import {modelInfos} from '../models'
+import {ArticleService} from '../services/article.service'
 import {IArticle} from '../models/interfaces/article.interface'
-import {ArticleRepository} from '../repositories/article.repository'
-import {logger} from '../utils/logger'
-// import {PrismaRepository} from '../repositories/prisma_repository'
 
 class ArticleController {
-  private articleManager: ArticleManager
+  private articleManager: ArticleService
 
   constructor () {
-    this.articleManager = new ArticleManager(new ArticleRepository(modelInfos.article.name))
+    this.articleManager = new ArticleService()
   }
 
   public index = (req: Request, res: Response, next: NextFunction) => {
