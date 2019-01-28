@@ -1,22 +1,22 @@
 import {DefineModelAttributes} from 'sequelize'
+import Article from '../../db/models/article.seq'
 import database from '../configs/database.config'
-import {IArticle} from './interfaces/article.interface'
-import {Article} from './sequelize/article.seq'
+import IArticle from './interfaces/article.interface'
 
-interface IModel {
+interface IModelInfo {
   name: string,
   seq: DefineModelAttributes<any>
 }
 
-// interface IModels {
-//   [index: string]: IModel
-// }
+interface IModelInfos {
+  [index: string]: IModelInfo
+}
 
-const modelInfos = {
+const modelInfos: IModelInfos = {
   article: {name: 'article', seq: Article}
 }
 
-function defineTable<TAttributes>(model: IModel) {
+function defineTable<TAttributes>(model: IModelInfo) {
   return database.define<TAttributes, TAttributes>(model.name, model.seq, {paranoid: true})
 }
 

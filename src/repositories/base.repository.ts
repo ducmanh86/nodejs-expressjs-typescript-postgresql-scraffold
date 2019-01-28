@@ -1,18 +1,10 @@
-import {Model} from 'sequelize'
-import {models} from '../models'
-import {IRead} from './interfaces/read.interface'
-import {IWrite} from './interfaces/write.interface'
+import IRead from './interfaces/read.interface'
+import IWrite from './interfaces/write.interface'
 
 // that class only can be extended
-export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
-  public readonly _model: Model<T, T>
-
-  protected constructor(modelName: string) {
-    this._model = models[modelName]
-  }
-
+export default abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
   public create(item: T): Promise<T> {
-    return Promise.resolve(this._model.create(item))
+    throw new Error('Method not implemented.')
   }
   public update(id: string, item: T): Promise<T> {
     throw new Error('Method not implemented.')
@@ -20,10 +12,13 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
   public delete(id: string): Promise<boolean> {
     throw new Error('Method not implemented.')
   }
-  public find(options): Promise<T[]> {
-    return Promise.resolve(this._model.findAll<T>(options))
+  public count(options): Promise<number> {
+    throw new Error('Method not implemented.')
   }
-  public findOne(id: string): Promise<T> {
+  public find(options): Promise<T[]> {
+    throw new Error('Method not implemented.')
+  }
+  public findOne(options): Promise<T | null> {
     throw new Error('Method not implemented.')
   }
 }

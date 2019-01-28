@@ -1,11 +1,21 @@
-import {IArticle} from './interfaces/article.interface'
+import IArticle from './interfaces/article.interface'
 
-export class Article implements IArticle {
+export default class Article implements IArticle {
+  public id?: number
   public title: string
-  public pages: number
+  public content: string
+  public short_content: string
+  public thumbnail_image: string
+  public keywords?: string
+  public status?: boolean
+  public created_at?: string
+  public updated_at?: string
+  public deleted_at?: string
 
-  constructor(title: string, pages: number) {
-    this.title = title
-    this.pages = pages
+  constructor(object: IArticle) {
+    this.title = object.title
+    this.content = object.content
+    this.short_content = object.short_content
+    this.thumbnail_image = object.thumbnail_image
   }
 }

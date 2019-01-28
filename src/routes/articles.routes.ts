@@ -1,15 +1,28 @@
 import {Request, Response, Router} from 'express'
-import ArticleController from '../controllers/article_controller'
+import ArticleController from '../controllers/article.controller'
 import {handleRuleResult} from '../rules'
-import {articleRules} from '../rules/article.rules'
+import ArticleRules from '../rules/article.rules'
 
-const router = Router()
+export default class ArticlesRoutes {
+  private router: Router
+  private articleRules: ArticleRules
 
-router.get('/articles', ArticleController.index)
-router.get('/articles/count', ArticleController.count)
+  constructor() {
+    this.articleRules = new ArticleRules()
+    this.setupRoutes()
+  }
 
-router.post('/articles', articleRules.forAddOrUpdate, handleRuleResult, (req: Request, res: Response) => {
-  res.json({message: 'Done'})
-})
+  public getRouter(): Router {
+    return this.router
+  }
 
-export {router}
+  private setupRoutes() {
+    this.router = Router()
+    this.router.get('/', ArticleController.index)
+    this.router.get('/count', ArticleController.count)
+
+    this.router.post('/', this.articleRules.forAddOrUpdate, handleRuleResult, (req: Request, res: Response) => {
+      res.json({message: 'Done'})
+    })
+  }
+}

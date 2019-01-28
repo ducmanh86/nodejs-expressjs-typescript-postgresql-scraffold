@@ -1,16 +1,18 @@
 import {NextFunction, Request, Response} from 'express'
-import {ArticleService} from '../services/article.service'
-import {IArticle} from '../models/interfaces/article.interface'
+import {modelInfos} from '../models'
+import IArticle from '../models/interfaces/article.interface'
+import SequelizeRepository from '../repositories/sequelize/sequelize.repository'
+import ArticleService from '../services/article.service'
 
 class ArticleController {
-  private articleManager: ArticleService
+  private articleService: ArticleService
 
   constructor () {
-    this.articleManager = new ArticleService()
+    this.articleService = new ArticleService(new SequelizeRepository(modelInfos.article.name))
   }
 
   public index = (req: Request, res: Response, next: NextFunction) => {
-    this.articleManager.getArticles()
+    this.articleService.getArticles()
       .then((articles: IArticle[]) => {
         res.json(articles)
       })
@@ -18,7 +20,7 @@ class ArticleController {
   }
 
   public count = (req: Request, res: Response, next: NextFunction) => {
-    this.articleManager.count()
+    this.articleService.count()
       .then((total) => {
         res.json({total})
       })

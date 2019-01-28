@@ -16,6 +16,14 @@ services:
       - db
     links:
       - db
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    links:
+      - db
   db:
     image: postgres:alpine
     volumes:
@@ -24,7 +32,3 @@ services:
       POSTGRES_PASSWORD: 123456
     ports:
       - 5432:5432
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080

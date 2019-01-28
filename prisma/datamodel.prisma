@@ -1,5 +1,0 @@
-type Article {
-   id: ID! @unique
-   title: String!
-   pages: Int!
-}

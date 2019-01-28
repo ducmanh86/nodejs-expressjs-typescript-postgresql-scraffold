@@ -24,6 +24,10 @@ const configs = {
   },
   migrationStorage: 'sequelize',
   seederStorage: 'sequelize',
+  define: {
+    freezeTableName: true,
+    underscored: true
+  }
 };
 
 module.exports = {
