@@ -1,8 +1,31 @@
-version: '3.5'
+# Use postgres/123456 user/password credentials
+version: '3.1'
+
 services:
-  vaylaithap-articles:
+  backend:
     build: .
     ports:
       - "3000:3000"
-    command: npm run db:migrate && pm2 start
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm start
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: postgres:alpine
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
     restart: always
+    ports:
+      - 8080:8080

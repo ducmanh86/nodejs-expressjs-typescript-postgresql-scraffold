@@ -8,9 +8,9 @@ interface IModel {
   seq: DefineModelAttributes<any>
 }
 
-interface IModels {
-  [index: string]: IModel
-}
+// interface IModels {
+//   [index: string]: IModel
+// }
 
 const modelInfos = {
   article: {name: 'article', seq: Article}

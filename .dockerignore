@@ -5,11 +5,10 @@ logs
 .vscode
 .idea
 docs
-test
 README.md
 .gitignore
 .env.example
-jest.config.js
 Dockerfile
 docker-compose.*
 .gitlab-ci.yml
+db_data

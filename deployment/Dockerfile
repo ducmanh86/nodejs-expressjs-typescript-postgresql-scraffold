@@ -7,9 +7,11 @@ RUN rm /etc/localtime && \
 # Create working directory
 WORKDIR /usr/src/app
 
-COPY package.json .
-COPY package-lock.json .
+# Copy source to image
+COPY . .
 
-RUN npm install
+RUN npm install --only=prod
+RUN npm install pm2 -g
+RUN pm2 install pm2-logrotate
 
 EXPOSE 3000
