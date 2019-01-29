@@ -1,5 +1,4 @@
 import {NextFunction, Request, Response} from 'express'
-import configs from '../configs'
 import {modelInfos} from '../models'
 import IArticle from '../models/interfaces/article.interface'
 import SequelizeRepository from '../repositories/sequelize.repository'
@@ -13,14 +12,15 @@ class ArticleController {
   }
 
   public index = (req: Request, res: Response, next: NextFunction) => {
-    this.articleService.getArticles({page: 1, order: 'id', sort: 'asc', limit: configs.QUERY_LIMIT_SIZE})
+    const {page, size, order, sort} = req.query
+    this.articleService.getArticles({page, order, sort, limit: size})
       .then((value: {
         rows: IArticle[],
         count: number
       }) => {
         res.json(this.articleService.paging({
-          page: 1,
-          size: configs.QUERY_LIMIT_SIZE,
+          page,
+          size,
           data: value.rows,
           total_items: value.count,
           protocol: req.protocol,
@@ -32,10 +32,26 @@ class ArticleController {
       .catch(next)
   }
 
+  public getArticle = (req: Request, res: Response, next: NextFunction) => {
+    this.articleService.getArticle(req.params.id)
+      .then((article: IArticle) => {
+        res.json(article)
+      })
+      .catch(next)
+  }
+
   public count = (req: Request, res: Response, next: NextFunction) => {
     this.articleService.count()
       .then((total) => {
         res.json({total})
+      })
+      .catch(next)
+  }
+
+  public create = (req: Request, res: Response, next: NextFunction) => {
+    this.articleService.createArticle(req.body)
+      .then((item: IArticle) => {
+        res.json(item)
       })
       .catch(next)
   }

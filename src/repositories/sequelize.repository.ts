@@ -11,7 +11,7 @@ export default class SequelizeRepository<T> extends BaseRepository<T> {
   }
 
   public create(item: T): Promise<T> {
-    throw new Error('Method not implemented.')
+    return Promise.resolve(this.model.create(item))
   }
 
   public update(id: string, item: T): Promise<T> {

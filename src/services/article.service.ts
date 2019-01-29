@@ -7,10 +7,10 @@ export default class ArticleService extends BaseService<IArticle> {
     super(repo)
   }
 
-  public getArticle(title: string): Promise<IArticle | null> {
+  public getArticle(id: number): Promise<IArticle | null> {
     return this.repo.findOne({
       where: {
-        title
+        id
       }
     })
   }
@@ -27,5 +27,9 @@ export default class ArticleService extends BaseService<IArticle> {
 
   public count(): Promise<number> {
     return this.repo.count({})
+  }
+
+  public createArticle(item: IArticle): Promise<IArticle> {
+    return this.repo.create(item)
   }
 }

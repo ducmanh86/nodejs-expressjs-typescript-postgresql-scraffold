@@ -1,6 +1,6 @@
-import {Request, Response, Router} from 'express'
+import {Router} from 'express'
 import ArticleController from '../controllers/article.controller'
-import {handleRuleResult} from '../rules'
+import {handlePagingResult, handleRuleResult} from '../rules'
 import ArticleRules from '../rules/article.rules'
 
 export default class ArticlesRoutes {
@@ -18,11 +18,10 @@ export default class ArticlesRoutes {
 
   private setupRoutes() {
     this.router = Router()
-    this.router.get('/', ArticleController.index)
+    this.router.get('/', this.articleRules.forPaging, handlePagingResult, ArticleController.index)
+    this.router.get('/:id', this.articleRules.forFindItem, handleRuleResult, ArticleController.getArticle)
     this.router.get('/count', ArticleController.count)
 
-    this.router.post('/', this.articleRules.forAddOrUpdate, handleRuleResult, (req: Request, res: Response) => {
-      res.json({message: 'Done'})
-    })
+    this.router.post('/', this.articleRules.forAddOrUpdate, handleRuleResult, ArticleController.create)
   }
 }
