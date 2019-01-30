@@ -23,8 +23,18 @@
   },
   "main": "./src/index.ts",
   "scripts": {
+    "docker:down": "docker-compose -f ./deployment/docker-compose.yml -p vaylaithap-articles down",
+    "docker:build": "docker-compose -f ./deployment/docker-compose.yml -p vaylaithap-articles build --no-cache",
+    "docker:run": "docker-compose -f ./deployment/docker-compose.yml -p vaylaithap-articles up --detach",
+    "docker:run:monit": "docker-compose -f ./deployment/docker-compose.yml -p vaylaithap-articles exec service pm2 monit",
+    "docker:run:logs": "docker-compose -f ./deployment/docker-compose.yml -p vaylaithap-articles exec service pm2 logs",
+    "docker:run:db:dev": "docker-compose -p vaylaithap-articles up --detach db",
+    "docker:run:dev": "docker-compose -p vaylaithap-articles up",
+
     "db": "sequelize",
     "db:migrate": "sequelize db:migrate",
+    "db:create": "sequelize db:create",
+
     "test": "jest --detectOpenHandles",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "start": "nodemon ./src/index.ts | pino-pretty -c -t -l"

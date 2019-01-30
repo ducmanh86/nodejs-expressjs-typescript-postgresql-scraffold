@@ -25,11 +25,6 @@ const startServer = () => {
 
     logger.info(`server is listening on ${configs.PORT}`)
 
-    if (process && process.send) {
-      // send 'ready' signal to PM2
-      process.send('ready')
-    }
-
     // exit server when close app
     process.on('SIGINT', closeServer)
   })

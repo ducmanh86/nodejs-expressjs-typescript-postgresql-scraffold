@@ -1,8 +1,12 @@
 version: '3.5'
 services:
-  vaylaithap-articles:
-    build: .
+  service:
+    build:
+      context: ../
+      dockerfile: ./deployment/Dockerfile
     ports:
-      - "3000:3000"
-    command: npm run db:migrate && pm2 start
+      - 3000:3000
+    tty: true
+    stdin_open: true
+    command: pm2-docker start ecosystem.config.js
     restart: always

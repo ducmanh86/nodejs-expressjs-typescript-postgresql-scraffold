@@ -12,6 +12,8 @@ COPY . .
 
 RUN npm install --only=prod
 RUN npm install pm2 -g
+RUN pm2 install typescript
 RUN pm2 install pm2-logrotate
+RUN npm run db:migrate -- --env production
 
 EXPOSE 3000
